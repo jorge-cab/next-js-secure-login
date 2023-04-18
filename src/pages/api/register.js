@@ -1,8 +1,14 @@
 import { MongoClient } from 'mongodb'
 import bcrypt from 'bcryptjs'
 import { encrypt } from '../../utils/crypto'
+import { authOptions } from './auth/[...nextauth]'
+import { getServerSession } from "next-auth/next"
 
 async function handler(req, res) {
+    const session = await getServerSession(req, res, authOptions)
+
+    console.log(session.role)
+
     if (req.method === 'POST') {
         const { email, password, role } = req.body;
 

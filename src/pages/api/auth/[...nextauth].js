@@ -10,7 +10,7 @@ const clientPromise = MongoClient.connect(process.env.MONGODB_URI, {
     useUnifiedTopology: true,
 })
 
-export default NextAuth({
+export const authOptions = {
     providers: [
         CredentialsProvider({
             name: 'Credentials',
@@ -69,4 +69,6 @@ export default NextAuth({
             return session
         }
     }
-})
+}
+
+export default NextAuth(authOptions)
